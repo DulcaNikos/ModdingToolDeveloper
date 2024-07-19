@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OnMAinGameSceneStartUp : MonoBehaviour
+public class OnMainGameSceneStartUp : MonoBehaviour
 {
     private void Awake()
     {
