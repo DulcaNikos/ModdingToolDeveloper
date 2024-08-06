@@ -34,24 +34,20 @@ public class DontDestroyOnLoadGameSceneScript : MonoBehaviour
     private void Awake()
     {
         // Ensure only one instance of this script exists
-        if (Instance == null)
-        {
-            Instance = this;
+        if (Instance != null && Instance != this) { Destroy(this); }
+        Instance = this;
 
-            // Initialize scene loaded flag with a default value
-            _isSceneLoaded = false;
+        // Limit the framerate to 120
+        Application.targetFrameRate = 120;
 
-            // Make this game object persist across scene loads
-            DontDestroyOnLoad(gameObject);
+        // Initialize scene loaded flag with a default value
+        _isSceneLoaded = false;
 
-            // Register for sceneLoaded event
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-        {
-            // If another instance exists, destroy this one
-            Destroy(gameObject);
-        }
+        // Make this game object persist across scene loads
+        DontDestroyOnLoad(gameObject);
+
+        // Register for sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /// <summary>
